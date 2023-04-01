@@ -12,10 +12,22 @@ import javax.inject.Inject
 /**
  * Created by Sahil Salgotra on 01/04/23 12:37 PM
  */
+/**
+ * Default implementation of [SkillRepository] interface which interacts with [SkillsApi] to fetch skills data
+ * and perform add/remove favourite actions.
+ *
+ * @property api instance of [SkillsApi] used for making network requests.
+ * @property sessionManager instance of [SessionManager] used for fetching authentication token.
+ */
 class DefaultSkillRepository @Inject constructor(
     private val api: SkillsApi,
     private val sessionManager: SessionManager
 ) : SkillRepository {
+
+    /**
+     * Fetches skills data from the [SkillsApi] using authentication token from [SessionManager].
+     * Returns [Resource.Success] with the fetched data or [Resource.Error] with the exception message.
+     */
     override suspend fun getSkillData(): Resource<SkillsDto> {
         return try {
             Resource.Success(
@@ -27,6 +39,13 @@ class DefaultSkillRepository @Inject constructor(
         }
     }
 
+    /**
+     * Adds a skill to favourites using [SkillsApi] and authentication token from [SessionManager].
+     * Returns [Resource.Success] with the response data or [Resource.Error] with the exception message.
+     *
+     * @param skillName name of the skill to add to favourites.
+     * @param dictionaryName name of the dictionary containing the skill.
+     */
     override suspend fun addFavourite(skillName: String, dictionaryName: String): Resource<AddRemoveFavouriteDto> {
         return try {
             Resource.Success(
@@ -41,6 +60,12 @@ class DefaultSkillRepository @Inject constructor(
         }
     }
 
+    /**
+     * Removes a skill from favourites using [SkillsApi] and authentication token from [SessionManager].
+     * Returns [Resource.Success] with the response data or [Resource.Error] with the exception message.
+     *
+     * @param skillName name of the skill to remove from favourites.
+     */
     override suspend fun removeFavourite(skillName: String): Resource<AddRemoveFavouriteDto> {
         return try {
             Resource.Success(

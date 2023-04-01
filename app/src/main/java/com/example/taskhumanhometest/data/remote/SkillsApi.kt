@@ -8,16 +8,16 @@ import retrofit2.http.POST
 
 interface SkillsApi {
 
-    @GET("/discover/topicDetails/physical%20fitness")
+    @GET("/v0.8/discover/topicDetails/physical%20fitness")
     suspend fun getSkillsData(@Header("Authorization") token: String): SkillsDto
 
-    @POST("/favorite/add")
+    @POST("/v0.8/favorite/add")
     suspend fun addFavourite(
         @Header("Authorization") token: String,
         @Body requestBody: AddRemoveFavouriteRequestBody
     ): AddRemoveFavouriteDto
 
-    @POST("favorite/remove")
+    @POST("/v0.8/favorite/remove")
     suspend fun removeFavourite(
         @Header("Authorization") token: String,
         @Body requestBody: AddRemoveFavouriteRequestBody

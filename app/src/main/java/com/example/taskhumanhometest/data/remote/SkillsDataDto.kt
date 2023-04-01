@@ -7,9 +7,9 @@ data class SkillsDataDto(
     val dictionaryName: String,
     val tileBackground: String,
     val skillIcon: String,
-    val availability: AvailabilityDto,
+    val availability: AvailabilityDto?,
     val moreProvidersAvailable: Boolean,
-    val providerInfo: List<ProviderInfoDto>,
-    val isFavourite: Boolean,
+    val providerInfo: List<ProviderInfoDto>?,
+    var isFavorite: Boolean = false,
     val columns: Int
 )
